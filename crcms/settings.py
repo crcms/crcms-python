@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'question.apps.QuestionConfig', # 这里用question也行，暂时不知道为什么，后期熟悉django,以及python后读取源码
+    'community.apps.CommunityConfig', # 这里用community也行，暂时不知道为什么，后期熟悉django,以及python后读取源码
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -51,7 +51,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'community.urls'
+ROOT_URLCONF = 'crcms.urls'
 
 TEMPLATES = [
     {
@@ -69,7 +69,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'community.wsgi.application'
+WSGI_APPLICATION = 'crcms.wsgi.application'
 
 
 # Database
