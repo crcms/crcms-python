@@ -77,14 +77,14 @@ WSGI_APPLICATION = 'crcms.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        # 'ENGINE': 'django.db.backends.postgresql',
-        # 'NAME': 'default',
-        # 'USER': 'default',
-        # 'PASSWORD': 'secret',
-        # 'HOST': 'postgres',
-        # 'PORT': '5432',
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'default',
+        'USER': 'default',
+        'PASSWORD': 'secret',
+        'HOST': '192.168.1.142',
+        'PORT': '5432',
     },
     'postgresql': {
         'ENGINE': 'django.db.backends.postgresql',
