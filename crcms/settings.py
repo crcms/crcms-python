@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/dev/howto/deployment/checklist/
 
@@ -27,11 +26,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
-    'community.apps.CommunityConfig', # 这里用community也行，暂时不知道为什么，后期熟悉django,以及python后读取源码
+    'community.apps.CommunityConfig',  # 这里用community也行，暂时不知道为什么，后期熟悉django,以及python后读取源码
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -71,7 +69,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'crcms.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
@@ -83,7 +80,7 @@ DATABASES = {
         'NAME': 'default',
         'USER': 'default',
         'PASSWORD': 'secret',
-        'HOST': '192.168.1.142',
+        'HOST': '192.168.1.106',
         'PORT': '5432',
     },
     'postgresql': {
@@ -91,7 +88,6 @@ DATABASES = {
         'NAME': 'default',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-password-validators
@@ -111,7 +107,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/dev/topics/i18n/
 
@@ -125,8 +120,17 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/dev/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# remote passport
+PASSPORT = {
+    'host': 'passport.crcms.cn',
+    'key': 1535667819,#1535667819,
+    'secret': '47aee3979ca82007b67328881b782330a2f2f52f',
+    'routes': {
+        'user': '/api/v1/user',
+    }
+}
