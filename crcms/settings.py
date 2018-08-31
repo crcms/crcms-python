@@ -80,7 +80,7 @@ DATABASES = {
         'NAME': 'default',
         'USER': 'default',
         'PASSWORD': 'secret',
-        'HOST': '192.168.1.106',
+        'HOST': '192.168.1.12',
         'PORT': '5432',
     },
     'postgresql': {
@@ -128,7 +128,7 @@ STATIC_URL = '/static/'
 # remote passport
 PASSPORT = {
     'host': 'passport.crcms.cn',
-    'key': 1535667819,#1535667819,
+    'key': '1535667819',#1535667819,
     'secret': '47aee3979ca82007b67328881b782330a2f2f52f',
     'routes': {
         'user': '/api/v1/user',

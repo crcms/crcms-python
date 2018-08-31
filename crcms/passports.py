@@ -10,13 +10,12 @@ from .settings import PASSPORT
 from http import client
 import json
 
-
 class Passport(object):
 
     def refresh(self, token: str) -> object:
         pass
 
-    def user(self, token: str):
+    def user(self, token: str) -> dict:
         response = self._http(PASSPORT['routes']['user'], 'POST', self._request_params({'token': token}))
         if response.status == 200:
             # json.loads(response.read().decode('utf-8')) # or
@@ -47,6 +46,6 @@ class Passport(object):
             'Accept': 'application/json',
             'Content-type': 'application/json',
         })
-        # todo 如果有问题注释测试看下，暂时请求后就关闭连接
-        connection.close()
         return connection.getresponse()
+
+
