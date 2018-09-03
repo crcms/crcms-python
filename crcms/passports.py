@@ -10,30 +10,44 @@ from .settings import PASSPORT
 from http import client
 import json
 
+
 class Passport(object):
 
-    def refresh(self, token: str) -> object:
-        pass
+    def refresh(self, token: str) -> dict:
+        try:
+            response = self._http(PASSPORT['routes']['refresh'], 'POST', self._request_params({'token': token}))
+            if response.status == 200:
+                # json.loads(response.read().decode('utf-8')) # or
+                return json.loads(response.read(), encoding='utf-8')
+            else:
+                raise Exception("Request error")
+        except(Exception):
+            raise Exception("Net error")
 
     def user(self, token: str) -> dict:
-        response = self._http(PASSPORT['routes']['user'], 'POST', self._request_params({'token': token}))
-        if response.status == 200:
-            # json.loads(response.read().decode('utf-8')) # or
-            return json.loads(response.read(), encoding='utf-8')
-        else:
-            raise Exception("Request error")
+        try:
+            response = self._http(PASSPORT['routes']['user'], 'POST', self._request_params({'token': token}))
+            if response.status == 200:
+                # json.loads(response.read().decode('utf-8')) # or
+                return json.loads(response.read(), encoding='utf-8')
+            else:
+                raise Exception("Request error")
+        except(Exception):
+            raise Exception("Net error")
 
     def check(self, token: str) -> bool:
-        # $response = $this->rpc->call(config('foundation.passport.routes.check'), $this->requestParams(
-        #     ['token' = > $token]));
-        # return $response->getStatusCode() == = 204 | | $response->getStatusCode() == = 200;
-        pass
+        try:
+            response = self._http(PASSPORT['routes']['check'], 'POST', self._request_params({'token': token}))
+            return response.status == 204 or response.status == 200
+        except(Exception):
+            raise Exception("Net error")
 
     def logout(self, token: str) -> bool:
-        # $response = $this->rpc->method('get')->call(config('foundation.passport.routes.logout'), $this->requestParams(
-        # ['token' = > $token]));
-        # return $response->getStatusCode() == = 204 | | $response->getStatusCode() == = 200;
-        pass
+        try:
+            response = self._http(PASSPORT['routes']['logout'], 'GET', self._request_params({'token': token}))
+            return response.status == 204 or response.status == 200
+        except(Exception):
+            raise Exception("Net error")
 
     def _request_params(self, params: dict) -> dict:
         # return params.update({'app_key': PASSPORT.get('key'), 'app_secret': PASSPORT.get('secret')})
@@ -47,5 +61,3 @@ class Passport(object):
             'Content-type': 'application/json',
         })
         return connection.getresponse()
-
-
