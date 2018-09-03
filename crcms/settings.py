@@ -133,7 +133,7 @@ PASSPORT = {
     'secret': '47aee3979ca82007b67328881b782330a2f2f52f',
     'routes': {
         'user': '/api/v1/user',
-        'check': '/api/v1/check',
+        'check': '/api/v1/check-login',
         'logout': '/api/v1/logout',
         'refresh': '/api/v1/refresh-token',
     }
