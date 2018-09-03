@@ -1,5 +1,8 @@
 from .passports import Passport
 from django.core.handlers.wsgi import WSGIRequest
+from django.urls import reverse
+from django.http import HttpResponseRedirect
+from .settings import PASSPORT
 
 
 class AuthMiddleware(object):
@@ -8,22 +11,24 @@ class AuthMiddleware(object):
         self.get_response = get_response
 
     def __call__(self, request: WSGIRequest):
-        print(type(self.get_response))
-        print(request.__class__)
-        passport = Passport()
+        # 放行的URL
+        if request.path in self._except_path():
+            return self.get_response(request)
 
-        # passport.check(request.GET['token'] if request.GET['token']
-        # not None else )
+        # token 验证
+        token = self._token(request)
+        if token is not None and Passport().check(token) is True:
+            return self.get_response(request)
+        else:
+            return HttpResponseRedirect(reverse('community.login'), {'app_key': PASSPORT['key']})
 
-        # passport.check(request)
-
-        response = self.get_response(request)
-        return response
-
-    def _token(self, request: WSGIRequest) -> str:
+    def _token(self, request: WSGIRequest) -> str or None:
         if 'token' in request.GET.keys():
             return request.GET['token']
         elif 'Authorization' in request.META.keys():
             return request.META['Authorization']
         else:
-            raise Exception('Token not found')
+            return None
+
+    def _except_path(self) -> tuple:
+        return ('/communities/login',)
