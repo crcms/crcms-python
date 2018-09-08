@@ -13,12 +13,11 @@ class AuthMiddleware(object):
 
     def __call__(self, request: WSGIRequest):
         # 放行的URL
-        if self._except_path(request) is False:
+        if self._except_path(request) is True:
             return self.get_response(request)
 
         # token 验证
         token = self._token(request)
-
         passport = Passport()
         if token is not None and passport.check(token) is True:
             # 绑定 user
@@ -36,8 +35,14 @@ class AuthMiddleware(object):
             return None
 
     def _except_path(self, request: WSGIRequest) -> bool:
-        list = ('/communities/login', '/admin*')
+
+        list = ('/communities/login', '/admin')
         for path in list:
-            if request.path == path or request.path.find(path) > -1:
-                return True
+            # if request.path == path or request.path.find(path) > -1:
+            #     return True
+
+            # if any([request.path == path ,request.path.find(path) > -1]):
+            #     return True
+            return True if any([request.path == path, request.path.find(path)]) > -1 else None
+
         return False
